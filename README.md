@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="/images/Dall-E-3-Image-Generator.png" alt="Project Logo" width="200"/>
+</p>
+
+
 # DALL-E Image Generator Script
 
 This Python script facilitates the generation of images using OpenAI's DALL-E based on textual prompts. It offers customization options for the image generation process, including model selection, image quality, and style preferences. Users also have the capability to download the generated images directly to their system.
