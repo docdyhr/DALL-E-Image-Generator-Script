@@ -13,7 +13,7 @@ Before utilizing the script, ensure Python is installed on your system. This scr
    Begin by cloning this repository to your local machine using Git:
 
    ```bash
-   git clone https://github.com/yourusername/dall-e-image-generator.git
+   git clone https://github.com/docdyhr/dall-e-image-generator.git
    cd dall-e-image-generator
    ```
 
