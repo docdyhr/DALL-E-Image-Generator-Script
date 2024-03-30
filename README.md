@@ -5,7 +5,7 @@
 # DALL-E Image Generator Script
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This project provides a script for generating images using OpenAI's DALL-E 3 model, with options for customization and downloading the generated images. It offers customization options for the image generation process, including model selection, image quality, and style preferences. Users also have the capability to download the generated images directly to their system.
 
