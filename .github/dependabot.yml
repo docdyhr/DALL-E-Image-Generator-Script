@@ -5,7 +5,52 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Enable version updates for Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/" # Location of package manifests (requirements.txt is in root)
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Copenhagen"
+    # Update dependencies weekly
+    open-pull-requests-limit: 10
+    # Labels to apply to Dependabot PRs
+    labels:
+      - "dependencies"
+      - "python"
+      - "automated"
+    # Assignees for the PRs
+    assignees:
+      - "docdyhr"
+    # Allow Dependabot to update both direct and indirect dependencies
+    allow:
+      - dependency-type: "all"
+    # Group minor and patch updates together
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Commit message preferences
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+
+  # Enable security updates for GitHub Actions (if you add any workflows)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Copenhagen"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "automated"
+    assignees:
+      - "docdyhr"
