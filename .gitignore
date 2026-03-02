@@ -209,3 +209,12 @@ tempCodeRunnerFile.py
 .DS_Store
 .output/
 output/
+
+### AI Tools ###
+.claude/
+.cursorrules
+.cursorignore
+.aider*
+.codeium/
+.continue/
+copilot-*
