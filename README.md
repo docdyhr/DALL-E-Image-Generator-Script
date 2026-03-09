@@ -59,7 +59,7 @@ The script supports several flags to tailor the image generation process:
 **Example Command:**
 
 ```bash
-python generate_image.py -p "A cute baby sea otter" --download --filename "cute_otter" --quality "hd" --style "vivid"
+python main.py -p "A cute baby sea otter" --download --filename "cute_otter" --quality "hd" --style "vivid"
 ```
 
 This command generates an HD, vivid-style image based on the prompt "A cute baby sea otter", downloads it to the `~/Downloads` folder, and names the file `cute_otter.png`.
