@@ -4,70 +4,88 @@
 
 # DALL-E Image Generator Script
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.12+-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Pylint](https://github.com/docdyhr/DALL-E-Image-Generator-Script/actions/workflows/pylint.yml/badge.svg)](https://github.com/docdyhr/DALL-E-Image-Generator-Script/actions/workflows/pylint.yml)
+[![CodeQL](https://github.com/docdyhr/DALL-E-Image-Generator-Script/actions/workflows/codeql.yml/badge.svg)](https://github.com/docdyhr/DALL-E-Image-Generator-Script/actions/workflows/codeql.yml)
 
-This project provides a script for generating images using OpenAI's DALL-E 3 model, with options for customization and downloading the generated images. It offers customization options for the image generation process, including model selection, image quality, and style preferences. Users also have the capability to download the generated images directly to their system.
+A command-line script for generating images using OpenAI's DALL-E 3 (and DALL-E 2) models. Supports customisation of image quality, style, and size, with optional direct download to `~/Downloads`.
 
-## Version 1.0
+## Installation
 
-### Installation
+Python 3.12 or later is required.
 
-Before utilizing the script, ensure Python is installed on your system. This script is compatible with Python version 3.6 and above.
-
-1. **Clone the Repository**
-
-   Begin by cloning this repository to your local machine using Git:
+1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/docdyhr/dall-e-image-generator.git
-   cd dall-e-image-generator
+   git clone https://github.com/docdyhr/DALL-E-Image-Generator-Script.git
+   cd DALL-E-Image-Generator-Script
    ```
 
-2. **Install Dependencies**
-
-   The script requires the `requests` library. Install all necessary dependencies using pip and the provided `requirements.txt` file:
+2. **Create a virtual environment and install dependencies**
 
    ```bash
+   python -m venv .venv
+   source .venv/bin/activate   # Windows: .venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-3. **Set Up OpenAI API Key**
-
-   An OpenAI API key is essential for using this script. Set your API key as an environment variable in your terminal:
+3. **Set your OpenAI API key**
 
    ```bash
    export OPENAI_API_KEY='your_api_key_here'
    ```
 
-   Make sure to replace `your_api_key_here` with your actual OpenAI API key.
+## Usage
 
-### Usage
-
-The script supports several flags to tailor the image generation process:
-
-- `-m`, `--model`: Specifies the model to use, defaulting to "dall-e-3".
-- `-p`, `--prompt`: The required prompt for image generation.
-- `-n`, `--number`: The number of images to generate, with a default of 1.
-- `-s`, `--size`: The size of the generated image, defaulting to "1024x1024". Allowed values include 1024x1024, 1792x1024, and 1024x1792.
-- `--output`: Determines the output format, either 'json' or 'text' (default).
-- `--download`: If set, downloads the generated image to `~/Downloads`.
-- `--filename`: An optional custom filename for the downloaded image. A '.png' extension will be appended if omitted.
-- `--quality`: The image quality, either "standard" or "hd" (defaults to "standard").
-- `--style`: The image style, either "vivid" or "natural" (optional).
-
-**Example Command:**
-
-```bash
-python main.py -p "A cute baby sea otter" --download --filename "cute_otter" --quality "hd" --style "vivid"
+```
+python main.py -p <prompt> [options]
 ```
 
-This command generates an HD, vivid-style image based on the prompt "A cute baby sea otter", downloads it to the `~/Downloads` folder, and names the file `cute_otter.png`.
+| Flag | Description | Default |
+|---|---|---|
+| `-p`, `--prompt` | Image generation prompt (**required**) | — |
+| `-m`, `--model` | Model: `dall-e-3` or `dall-e-2` | `dall-e-3` |
+| `-n`, `--number` | Number of images to generate | `1` |
+| `-s`, `--size` | Image size: `1024x1024`, `1792x1024`, `1024x1792` | `1024x1024` |
+| `--quality` | Quality: `standard` or `hd` | `standard` |
+| `--style` | Style: `vivid` or `natural` (optional) | — |
+| `--output` | Output format: `json` or `text` | `text` |
+| `--download` | Download the generated image to `~/Downloads` | — |
+| `--filename` | Custom filename for the downloaded image (`.png` appended if omitted) | — |
 
-### Error Handling
+**Example:**
 
-The script includes error handling to address issues such as invalid API keys or request parameters. If an error occurs, the script will print the error message and terminate gracefully.
+```bash
+python main.py -p "A cute baby sea otter" --download --filename "cute_otter" --quality hd --style vivid
+```
 
-### License
+Generates an HD vivid-style image, downloads it to `~/Downloads/cute_otter.png`.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Development
+
+Dependencies are managed with [pip-tools](https://pip-tools.readthedocs.io/).
+
+```bash
+pip install pip-tools
+
+# Install exact pinned versions
+pip sync requirements.txt
+
+# Upgrade all dependencies
+pip-compile --upgrade requirements.in && pip sync requirements.txt
+
+# Upgrade a single package
+pip-compile --upgrade-package requests requirements.in
+```
+
+## Security
+
+- API key is read from the `OPENAI_API_KEY` environment variable — never hardcoded.
+- Secret scanning and push protection are enabled on this repository.
+- Dependencies are audited on every CI run with `pip-audit` and `bandit`.
+- CodeQL SAST runs on every push and weekly.
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
