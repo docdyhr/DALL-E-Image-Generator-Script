@@ -20,11 +20,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pylint pip-audit
+          pip install pylint pip-audit bandit
           pip install -r requirements.txt
-      - name: Security audit
+      - name: Security audit (pip-audit)
         run: |
           pip-audit -r requirements.txt
+      - name: Security audit (bandit)
+        run: |
+          bandit -r . --exclude ./.venv -ll -q
       - name: Analysing the code with pylint
         run: |
           pylint $(git ls-files '*.py')
