@@ -39,6 +39,7 @@ def download_image(url, filename, custom_name=None):
     """Download an image from a URL to ~/Downloads."""
     downloads_path = str(Path.home() / "Downloads")
     if custom_name:
+        custom_name = Path(custom_name).name  # strip any directory traversal
         if not custom_name.lower().endswith(".png"):
             custom_name += ".png"
         filepath = os.path.join(downloads_path, custom_name)
@@ -59,7 +60,10 @@ def main():
         description="Generate images using OpenAI's DALL-E."
     )
     parser.add_argument(
-        "-m", "--model", default="dall-e-3", help='Model to use, default is "dall-e-3".'
+        "-m", "--model",
+        choices=["dall-e-3", "dall-e-2"],
+        default="dall-e-3",
+        help='Model to use, default is "dall-e-3".',
     )
     parser.add_argument(
         "-p", "--prompt", required=True, help="Prompt for the generation (obligatory)."
@@ -151,7 +155,8 @@ def main():
                     )
                     download_image(item["url"], filename, args.filename)
     except requests.exceptions.HTTPError as e:
-        print(f"HTTP Error: {e.response.status_code}\n{e.response.text}\n")
+        msg = e.response.json().get("error", {}).get("message", e.response.text)
+        print(f"HTTP Error {e.response.status_code}: {msg}\n")
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}\n")
 
