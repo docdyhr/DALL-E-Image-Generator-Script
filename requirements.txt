@@ -4,11 +4,11 @@
 #
 #    pip-compile requirements.in
 #
-certifi==2026.5.20
+certifi==2026.6.17
     # via requests
 charset-normalizer==3.4.7
     # via requests
-idna==3.16
+idna==3.18
     # via requests
 requests==2.34.2
     # via -r requirements.in
