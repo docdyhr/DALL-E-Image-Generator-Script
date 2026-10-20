@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **Vendored agent skills**: `.claude/skills/` carries 4 skills from github/awesome-copilot at commit `cb64ad1` (`dependabot`, `docs-sync-audit`, `github-actions-hardening`, `test-gap-audit`), byte-identical to upstream with its MIT license, for Claude Code and GitHub Copilot. Repo rules take precedence over them (no PR merges or auto-merge, no installs, report-only audits).
+
 ### Security
 - Upgraded `urllib3` 2.6.3 → 2.7.0 to patch CVE-2026-44431 (sensitive header
   leak on cross-origin redirects) and CVE-2026-44432 (decompression bomb via

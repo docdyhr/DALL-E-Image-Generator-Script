@@ -211,7 +211,9 @@ tempCodeRunnerFile.py
 output/
 
 ### AI Tools ###
-.claude/
+**/.claude/*
+# Shared agent skills are versioned (root only)
+!/.claude/skills/
 .cursorrules
 .cursorignore
 .aider*
