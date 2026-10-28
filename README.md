@@ -93,7 +93,7 @@ pip-compile --upgrade-package requests requirements.in
 
 - API key is read from the `OPENAI_API_KEY` environment variable — never hardcoded.
 - Secret scanning and push protection are enabled on this repository.
-- Dependencies are audited on every CI run with `pip-audit` and `bandit`.
+- Dependencies are audited with `pip-audit` and `bandit` on every CI run and weekly.
 - CodeQL SAST runs on every push and weekly.
 
 ## License
