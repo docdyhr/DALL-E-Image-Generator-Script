@@ -8,8 +8,9 @@ and `dependabot/references/pr-commands.md` (the "Force push over extra commits" 
 locally. Upstream says the marker allows Dependabot to "rebase over" extra commits; per
 [GitHub's docs](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/managing-pull-requests-for-dependency-updates)
 it lets Dependabot force-push over them, discarding them. Keep both corrections when refreshing
-until upstream fixes the wording. Do not edit the files here otherwise; refresh from upstream
-instead.
+until upstream fixes the wording
+([github/awesome-copilot#5858](https://github.com/github/awesome-copilot/issues/5858)). Do not edit
+the files here otherwise; refresh from upstream instead.
 
 Claude Code loads `.claude/skills/` as project skills, and GitHub Copilot (cloud agent, CLI, VS Code
 agent mode) reads it too. Where a skill disagrees with the rules below, the repo's rules win.
