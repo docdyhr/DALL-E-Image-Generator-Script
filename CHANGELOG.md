@@ -15,6 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added `bandit` SAST to CI pipeline to catch security issues automatically
 - Enabled GitHub secret scanning and push protection on the repository
 - Added CodeQL SAST workflow (runs on push/PR and weekly)
+- Upgraded `certifi` 2026.7.22 → 2026.10.19 to drop the emSign root CAs whose
+  intermediate CA keys were compromised (GHSA-6q48-6c7w-9gw2, critical) (#70)
+- `pip-audit` and `bandit` now also run weekly (Thursdays) and on manual
+  dispatch, so advisories published against the pinned `requirements.txt`
+  are caught between pushes
 
 ### Changed
 - Switched dependency management to [pip-tools](https://pip-tools.readthedocs.io/):
