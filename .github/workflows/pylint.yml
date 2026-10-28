@@ -1,6 +1,13 @@
 name: Pylint
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    # Weekly re-audit (Thu 06:17 UTC): pip-audit catches advisories published
+    # against the pinned requirements.txt between pushes.
+    - cron: "17 6 * * 4"
+  workflow_dispatch:
 
 permissions:
   contents: read
