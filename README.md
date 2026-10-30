@@ -75,18 +75,32 @@ Generates an HD vivid-style image, downloads it to `~/Downloads/cute_otter.png`.
 ## Development
 
 Dependencies are managed with [pip-tools](https://pip-tools.readthedocs.io/).
+`requirements.in` lists the runtime dependencies and `requirements-dev.in` the
+lint and audit tools CI runs (`pylint`, `pip-audit`, `bandit`); `pip-compile`
+pins each into its `.txt` file. Packages pinned in both files (`requests` and
+its dependencies, which `pip-audit` also uses) must keep the same version, so
+upgrade them in both files together: CI installs both lockfiles in one `pip`
+call, and a mismatch fails it.
 
 ```bash
 pip install pip-tools
 
-# Install exact pinned versions
-pip sync requirements.txt
+# Install exact pinned versions (runtime and CI tools)
+pip-sync requirements.txt requirements-dev.txt
 
 # Upgrade all dependencies
-pip-compile --upgrade requirements.in && pip sync requirements.txt
+pip-compile --upgrade requirements.in
+pip-compile --upgrade requirements-dev.in
+pip-sync requirements.txt requirements-dev.txt
 
-# Upgrade a single package
+# Upgrade a single package in every file that pins it
 pip-compile --upgrade-package requests requirements.in
+pip-compile --upgrade-package requests requirements-dev.in
+
+# Run CI's checks locally
+pip-audit -r requirements.txt
+bandit -r . --exclude ./.venv -ll -q
+pylint $(git ls-files '*.py')
 ```
 
 ## Security

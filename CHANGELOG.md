@@ -38,6 +38,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - CI matrix expanded to Python 3.12 and 3.13
 - CI upgraded to `actions/checkout@v6` and `actions/setup-python@v6`
 - Added `pip-audit` dependency vulnerability check to CI
+- CI installs `pylint`, `pip-audit` and `bandit` from the new pinned
+  `requirements-dev.txt` (compiled from `requirements-dev.in`) instead of
+  their latest releases, so a new tool release can no longer change CI results
+  without a commit; Dependabot's existing pip config covers the new files
+- Updated `certifi` 2026.10.19 → 2026.10.23: its CA bundle drops the
+  `emSign Root CA - C1` and `emSign ECC Root CA - C3` roots, leaving
+  `emSign Root CA - G1` as the only emSign root
 
 ## [1.0.0] - 2024-03-01
 
