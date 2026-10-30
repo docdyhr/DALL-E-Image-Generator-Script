@@ -19,8 +19,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added `bandit` SAST to CI pipeline to catch security issues automatically
 - Enabled GitHub secret scanning and push protection on the repository
 - Added CodeQL SAST workflow (runs on push/PR and weekly)
-- Upgraded `certifi` 2026.7.22 → 2026.10.19 to drop the emSign root CAs whose
-  intermediate CA keys were compromised (GHSA-6q48-6c7w-9gw2, critical) (#70)
+- Upgraded `certifi` 2026.7.22 → 2026.10.19 to drop the `emSign ECC Root CA - G3`
+  root, whose intermediate CA keys were compromised (GHSA-6q48-6c7w-9gw2,
+  critical) (#70)
 - `pip-audit` and `bandit` now also run weekly (Thursdays) and on manual
   dispatch, so advisories published against the pinned `requirements.txt`
   are caught between pushes
@@ -40,8 +41,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added `pip-audit` dependency vulnerability check to CI
 - CI installs `pylint`, `pip-audit` and `bandit` from the new pinned
   `requirements-dev.txt` (compiled from `requirements-dev.in`) instead of
-  their latest releases, so a new tool release can no longer change CI results
-  without a commit; Dependabot's existing pip config covers the new files
+  their latest releases, so a new release of those tools or their dependencies
+  can no longer change CI results without a commit (pip itself still floats:
+  CI upgrades it); Dependabot's existing pip config covers the new file
+- Both lockfiles are now compiled with Python 3.12, the oldest supported
+  version, so Dependabot (which compiles with the interpreter named in each
+  file's header) also resolves the dependencies that only Python 3.12 needs
 - Updated `certifi` 2026.10.19 → 2026.10.23: its CA bundle drops the
   `emSign Root CA - C1` and `emSign ECC Root CA - C3` roots, leaving
   `emSign Root CA - G1` as the only emSign root
