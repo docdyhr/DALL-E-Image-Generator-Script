@@ -24,7 +24,7 @@ defusedxml==0.7.1
     # via py-serializable
 dill==0.4.1
     # via pylint
-filelock==4.2.4
+filelock==4.2.9
     # via cachecontrol
 idna==3.20
     # via requests
@@ -40,7 +40,7 @@ mdurl==0.1.2
     # via markdown-it-py
 msgpack==1.2.4
     # via cachecontrol
-mypy-extensions==1.1.0
+mypy-extensions==1.2.0
     # via isort
 packageurl-python==0.17.6
     # via cyclonedx-python-lib
@@ -54,7 +54,7 @@ pip-audit==2.10.1
     # via -r requirements-dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
-platformdirs==4.14.0
+platformdirs==4.14.5
     # via
     #   pip-audit
     #   pylint
